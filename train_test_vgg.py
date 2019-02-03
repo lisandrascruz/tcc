@@ -1,5 +1,4 @@
-# python train_vgg.py -d "/home/lili/Downloads/keras-libras/libras" -m "/home/lili/Downloads/keras-libras/output/smallvggnet.model"  -l "/home/lili/Downloads/keras-libras/output/smallvggnet.pickle" -p "/home/lili/Downloads/keras-libras/output/smallvggnet_plot.png"
-# python train_vgg.py -d "C:/Users/lisan/Desktop/keras-libras/keras-libras/libras" -m "C:/Users/lisan/Desktop/keras-libras/keras-libras/output/smallvggnet.model"  -l "C:/Users/lisan/Desktop/keras-libras/keras-libras/output/smallvggnet.pickle" -p "C:/Users/lisan/Desktop/keras-libras/keras-libras/output/smallvggnet_plot.png"
+#python train_test_vgg.py -dTrain "A:/Projetos/TCC/tcc/libras-p1" -dTest "A:/Projetos/TCC/tcc/libras-p2" -m "A:/Projetos/TCC/tcc/output/smallvggnet.model"  -l "A:/Projetos/TCC/tcc/output/smallvggnet.pickle" -p "A:/Projetos/TCC/tcc/output/smallvggnet_plot.png"
 import os
 import cv2
 import pickle
