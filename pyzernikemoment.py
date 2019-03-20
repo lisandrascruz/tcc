@@ -30,7 +30,7 @@ def radialpoly(r, n, m):
     rad = np.zeros(r.shape, r.dtype)
     P = (n - abs(m)) / 2
     Q = (n + abs(m)) / 2
-    for s in xrange(P + 1):
+    for s in range(P + 1):
         c = (-1) ** s * factorial(n - s)
         c /= factorial(s) * factorial(Q - s) * factorial(P - s)
         rad += c * r ** (n - 2 * s)
