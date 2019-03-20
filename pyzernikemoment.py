@@ -30,7 +30,7 @@ def radialpoly(r, n, m):
     rad = np.zeros(r.shape, r.dtype)
     P = (n - abs(m)) / 2
     Q = (n + abs(m)) / 2
-    for s in range(P + 1):
+    for s in range(int(P + 1)):
         c = (-1) ** s * factorial(n - s)
         c /= factorial(s) * factorial(Q - s) * factorial(P - s)
         rad += c * r ** (n - 2 * s)
@@ -61,7 +61,7 @@ def Zernikemoment(src, n, m):
     if src.dtype != np.float32:
         src = np.where(src > 0, 0, 1).astype(np.float32)
     if len(src.shape) == 3:
-        print ('the input image src should be in gray')
+        print('the input image src should be in gray')
         return
 
     H, W = src.shape
