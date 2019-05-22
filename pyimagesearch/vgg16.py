@@ -27,7 +27,7 @@ class VGG16:
 		model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
 		model.add(Activation("relu"))
 		model.add(BatchNormalization(axis=chanDim))
-        model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
+        	model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
 		model.add(Activation("relu"))
 		model.add(BatchNormalization(axis=chanDim))
 
@@ -73,7 +73,7 @@ class VGG16:
 		model.add(MaxPooling2D(pool_size=(2, 2)))
 		model.add(Dropout(0.25))
 
-        # (CONV => RELU) * 3 => POOL layer set
+        	# (CONV => RELU) * 3 => POOL layer set
 		model.add(Conv2D(512, (3, 3), padding="same"))
 		model.add(Activation("relu"))
 		model.add(BatchNormalization(axis=chanDim))
@@ -92,16 +92,16 @@ class VGG16:
 
 		model.add(Dense(4096))
 		model.add(Activation("relu"))
-        model.add(BatchNormalization())
-        model.add(Dense(4096))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization())
+		model.add(BatchNormalization())
+		model.add(Dense(4096))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization())
 
 		model.add(Dropout(0.5))
 		# softmax classifier
 		model.add(Dense(classes))
 		model.add(Activation("softmax"))
 
-        # total: 16 camadas no total
+        	# total: 16 camadas no total
 		# return the constructed network architecture
 		return model
