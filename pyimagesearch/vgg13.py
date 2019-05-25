@@ -10,89 +10,89 @@ from keras import backend as K
 
 class VGG13:
 	@staticmethod
-    def build(width, height, depth, classes):
-        # initialize the model along with the input shape to be
-        # "channels last" and the channels dimension itself
-        model = Sequential()
-        inputShape = (height, width, depth)
-        chanDim = -1
+	def build(width, height, depth, classes):
+		# initialize the model along with the input shape to be
+		# "channels last" and the channels dimension itself
+		model = Sequential()
+		inputShape = (height, width, depth)
+		chanDim = -1
 
-        # if we are using "channels first", update the input shape
-        # and channels dimension
-        if K.image_data_format() == "channels_first":
-            inputShape = (depth, height, width)
-            chanDim = 1
+		# if we are using "channels first", update the input shape
+		# and channels dimension
+		if K.image_data_format() == "channels_first":
+		    inputShape = (depth, height, width)
+		    chanDim = 1
 
-        # 2CONV => 2RELU => POOL layer set
-        model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
+		# 2CONV => 2RELU => POOL layer set
+		model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
+		model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
 
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
 
-        # (CONV => RELU) * 2 => POOL layer set
-        model.add(Conv2D(128, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        model.add(Conv2D(128, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
+		# (CONV => RELU) * 2 => POOL layer set
+		model.add(Conv2D(128, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
+		model.add(Conv2D(128, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
 
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
 
-        # (CONV => RELU) * 2 => POOL layer set
-        model.add(Conv2D(256, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        model.add(Conv2D(256, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
+		# (CONV => RELU) * 2 => POOL layer set
+		model.add(Conv2D(256, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
+		model.add(Conv2D(256, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
 
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
 
-        # (CONV => RELU) * 2 => POOL layer set
-        model.add(Conv2D(512, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        model.add(Conv2D(512, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
+		# (CONV => RELU) * 2 => POOL layer set
+		model.add(Conv2D(512, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
+		model.add(Conv2D(512, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
 
-        # (CONV => RELU) * 3 => POOL layer set
-        model.add(Conv2D(512, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        model.add(Conv2D(512, (3, 3), padding="same"))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization(axis=chanDim))
-        
-        model.add(MaxPooling2D(pool_size=(2, 2)))
-        model.add(Dropout(0.25))
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
 
-        # first (and only) set of FC => RELU layers
-        model.add(Flatten())
+		# (CONV => RELU) * 3 => POOL layer set
+		model.add(Conv2D(512, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
+		model.add(Conv2D(512, (3, 3), padding="same"))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization(axis=chanDim))
 
-        model.add(Dense(4096))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization())
-        model.add(Dense(4096))
-        model.add(Activation("relu"))
-        model.add(BatchNormalization())
+		model.add(MaxPooling2D(pool_size=(2, 2)))
+		model.add(Dropout(0.25))
 
-        model.add(Dropout(0.5))
-        # softmax classifier
-        model.add(Dense(classes))
-        model.add(Activation("softmax"))
+		# first (and only) set of FC => RELU layers
+		model.add(Flatten())
 
-        # total: 13 camadas no total
-        # return the constructed network architecture
-        return model
+		model.add(Dense(4096))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization())
+		model.add(Dense(4096))
+		model.add(Activation("relu"))
+		model.add(BatchNormalization())
+
+		model.add(Dropout(0.5))
+		# softmax classifier
+		model.add(Dense(classes))
+		model.add(Activation("softmax"))
+
+		# total: 13 camadas no total
+		# return the constructed network architecture
+		return model
