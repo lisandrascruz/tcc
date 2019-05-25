@@ -27,7 +27,7 @@ class VGG13:
 		model.add(Conv2D(64, (3, 3), padding="same", input_shape=inputShape))
 		model.add(Activation("relu"))
 		model.add(BatchNormalization(axis=chanDim))
-
+		
 		model.add(MaxPooling2D(pool_size=(2, 2)))
 		model.add(Dropout(0.25))
 
